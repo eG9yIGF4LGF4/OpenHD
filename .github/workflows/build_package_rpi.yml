@@ -22,7 +22,7 @@ jobs:
         - target: bullseye
           base_image: raspios_lite:2023-05-03
         - target: bookworm
-          base_image: raspios_lite:2024-03-15
+          base_image: raspios_lite:latest
     steps:    
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
