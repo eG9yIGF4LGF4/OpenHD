@@ -41,8 +41,8 @@ jobs:
       with:
         base_image: ${{ matrix.base_image }}
         image_additional_mb: 4000
-        copy_repository_path: /opt/OpenHD/
-        copy_artifact_path: "*.deb"
+        copy_repository_path: /opt/
+        copy_artifact_path: OpenHD
         import_github_env: true
         commands: |
             cd /opt
@@ -54,13 +54,14 @@ jobs:
             cd OpenHD
             chown -R root:root ../OpenHD
             sudo ./package.sh standard armhf raspbian ${{ matrix.target }}
+            ls -falnR
 
     - name: Upload to Github
       uses: 'actions/upload-artifact@v2'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: "OpenHD"
+        name: "OpenHD-${{ matrix.target }}"
         path: |
           OpenHD/*.deb
         if-no-files-found: error
