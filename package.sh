@@ -3,9 +3,10 @@
 CUSTOM="${1}"
 PACKAGE_ARCH="${2}"
 OS="${3}"
+SLUG="${4}"
 
 PKGDIR="/tmp/openhd-installdir"
-VERSION="2.5.2-beta-$(date '+%Y%m%d%H%M')-$(git rev-parse --short HEAD)"
+VERSION="2.5.0-user-$(date '+%Y%m%d%H%M')-$(git rev-parse --short HEAD)"
 
 create_package_directory() {
   rm -rf /tmp/openhd-installdir
@@ -60,7 +61,7 @@ build_package() {
     PLATFORM_CONFIGS=""
   fi
 
-  rm "${PACKAGE_NAME}_${VERSION}_${PACKAGE_ARCH}.deb" > /dev/null 2>&1 || true
+  rm "${PACKAGE_NAME}_${VERSION}_${PACKAGE_ARCH}-${SLUG}.deb" > /dev/null 2>&1 || true
 
   cmake OpenHD/
   make -j4
@@ -69,7 +70,7 @@ build_package() {
   # Assuming fpm is installed and properly configured
   fpm -a "${PACKAGE_ARCH}" -s dir -t deb -n "${PACKAGE_NAME}" -v "${VERSION}" -C "${PKGDIR}" \
     ${PLATFORM_CONFIGS} \
-    -p "${PACKAGE_NAME}_${VERSION}_${PACKAGE_ARCH}.deb" \
+    -p "${PACKAGE_NAME}_${VERSION}_${PACKAGE_ARCH}-${SLUG}.deb" \
     --after-install after-install.sh \
     --before-install before-install.sh \
     ${PACKAGES}
