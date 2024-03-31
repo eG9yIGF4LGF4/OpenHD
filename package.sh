@@ -41,6 +41,11 @@ create_package_directory() {
 
 build_package() {
 
+  aptitude clean
+  aptitude --download-only install libcamera-openhd
+  echo '-------'
+  ls /var/cache/apt/archives/*.deb 
+
   if [[ "${PACKAGE_ARCH}" == "armhf" ]]; then
     if [[ "${CUSTOM}" == "standard" ]]; then
       PACKAGE_NAME="openhd"
