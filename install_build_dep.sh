@@ -25,7 +25,12 @@ PLATFORM_PACKAGES_REMOVE=""
  # Add OpenHD Repository platform-specific packages
  apt install -y curl
  curl -1sLf 'https://dl.cloudsmith.io/public/openhd/release/setup.deb.sh'| sudo -E bash
+
  PKG_LIST="/etc/apt/sources.list.d/openhd-release.list"
+
+ rm /etc/apt/sources.list.d/openhd*
+ touch $PKG_LIST
+ 
  echo "deb https://dl.cloudsmith.io/public/openhd/release/deb/raspbian bullseye main" | tee -a $PKG_LIST
  echo "deb https://dl.cloudsmith.io/public/openhd/dev-release/deb/raspbian bullseye main" | tee -a $PKG_LIST
      
