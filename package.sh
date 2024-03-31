@@ -43,7 +43,7 @@ build_package() {
 
   if [[ "${PACKAGE_ARCH}" == "armhf" ]]; then
       DISTRO=$(uname -a | grep bullseye)
-      if [[ -z $DISTRO ]]; then
+      if [[ -z "$DISTRO" ]]; then
         PKG_LIST="/etc/apt/sources.list.d/openhd.bullseye.list"
         touch $PKG_LIST
         echo "deb https://dl.cloudsmith.io/public/openhd/release/deb/raspbian bullseye main" | tee -a $PKG_LIST
