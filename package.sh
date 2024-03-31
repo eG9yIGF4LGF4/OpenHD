@@ -48,6 +48,10 @@ build_package() {
         touch $PKG_LIST
         echo "deb https://dl.cloudsmith.io/public/openhd/release/deb/raspbian bullseye main" | tee -a $PKG_LIST
         echo "deb https://dl.cloudsmith.io/public/openhd/dev-release/deb/raspbian bullseye main" | tee -a $PKG_LIST
+     
+        wget -O - -q "https://dl.cloudsmith.io/public/openhd/release/gpg.556700D37C2BB5E8.key" | apt-key add -
+        wget -O - -q "https://dl.cloudsmith.io/public/openhd/dev-release/gpg.C3F2B13772CD7F9E.key" | apt-key add -
+        
         apt-get -y update
       fi
   
