@@ -41,12 +41,16 @@ create_package_directory() {
 
 build_package() {
 
-  aptitude clean
-  aptitude --download-only install libcamera-openhd
-  echo '-------'
-  ls /var/cache/apt/archives/*.deb 
-
   if [[ "${PACKAGE_ARCH}" == "armhf" ]]; then
+      DISTRO=$(uname -a | grep bullseye)
+      if [[ -z $DISTRO ]]; then
+        PKG_LIST="/etc/apt/sources.list.d/openhd.bullseye.list"
+        touch $PKG_LIST
+        echo "deb https://dl.cloudsmith.io/public/openhd/release/deb/raspbian bullseye main" | tee -a $PKG_LIST
+        echo "deb https://dl.cloudsmith.io/public/openhd/dev-release/deb/raspbian bullseye main" | tee -a $PKG_LIST
+        apt-get -y update
+      fi
+  
     if [[ "${CUSTOM}" == "standard" ]]; then
       PACKAGE_NAME="openhd"
       PACKAGES="-d libcamera-openhd -d gst-openhd-plugins -d iw -d nmap -d aircrack-ng -d i2c-tools -d libv4l-dev -d libusb-1.0-0 -d libpcap-dev -d libnl-3-dev -d libnl-genl-3-dev -d libsdl2-2.0-0 -d libsodium-dev -d gstreamer1.0-plugins-base -d gstreamer1.0-plugins-good -d gstreamer1.0-plugins-bad -d gstreamer1.0-plugins-ugly -d gstreamer1.0-libav -d gstreamer1.0-tools -d gstreamer1.0-alsa -d gstreamer1.0-pulseaudio"
