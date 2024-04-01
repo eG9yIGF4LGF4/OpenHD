@@ -29,10 +29,12 @@ create_package_directory() {
       mkdir -p /tmp/openhd-installdir/usr/share/applications/
       cp shortcuts/* /tmp/openhd-installdir/usr/share/applications/
       mkdir -p /tmp/openhd-installdir/usr/local/share/openhd_misc/
+      mkdir -p /tmp/openhd-installdir/usr/local/lib
       cp shortcuts/OpenHD.ico /tmp/openhd-installdir/usr/local/share/openhd_misc/
       mkdir -p /tmp/openhd-installdir/etc/profile.d/
       cp desktop-truster.sh /tmp/openhd-installdir/etc/profile.d/
       sudo chmod +777 /tmp/openhd-installdir/etc/profile.d/desktop-truster.sh
+      cp OpenHD/libr2inference-0.0.so.0 /tmp/openhd-installdir/usr/local/lib/
   fi
   # always - copy the hardware.config file
   mkdir -p "${PKGDIR}/boot/openhd/"
