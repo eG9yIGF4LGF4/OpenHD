@@ -41,8 +41,9 @@ jobs:
       with:
         base_image: ${{ matrix.base_image }}
         image_additional_mb: 4000
+        bind_mount_repository: true
         copy_repository_path: /opt
-        copy_artifact_path: "**/*.deb"
+        #copy_artifact_path: "**/*.deb"
         import_github_env: true
         commands: |
             cd /opt
@@ -62,7 +63,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: "OpenHD-${{ matrix.target }}"
-        path: |
-          "*-${{ matrix.target }}.deb"
+        name: "OpenHD-${{ matrix.target }}.deb"
+        path: "**/*.deb"
         if-no-files-found: error
