@@ -6,11 +6,12 @@ PLATFORM="$1"
 
 BASE_PACKAGES="libusb-1.0-0-dev libpcap-dev libsodium-dev libnl-3-dev libnl-genl-3-dev libnl-route-3-dev libsdl2-dev"
 VIDEO_PACKAGES="libgstreamer-plugins-base1.0-dev libv4l-dev"
-BUILD_PACKAGES="git build-essential autotools-dev automake libtool python3-pip autoconf apt-transport-https ruby-dev cmake"
+CORAL_PACKAGES="libedgetpu1-max libedgetpu-dev"
+BUILD_PACKAGES="git build-essential autotools-dev automake libtool python3-pip autoconf apt-transport-https ruby-dev cmake libpython3-dev libusb-1.0-0-dev"
 
 
 function install_pi_packages {
-PLATFORM_PACKAGES="libcamera-openhd libedgetpu1-max"
+PLATFORM_PACKAGES="libcamera-openhd"
 PLATFORM_PACKAGES_REMOVE="python3-libcamera libcamera0"
 }
 function install_x86_packages {
@@ -68,7 +69,7 @@ PLATFORM_PACKAGES_REMOVE=""
 
  # Install platform-specific packages
  echo "Installing platform-specific packages..."
- for package in ${PLATFORM_PACKAGES} ${BASE_PACKAGES} ${VIDEO_PACKAGES} ${BUILD_PACKAGES}; do
+ for package in ${PLATFORM_PACKAGES} ${BASE_PACKAGES} ${VIDEO_PACKAGES} ${CORAL_PACKAGES} ${BUILD_PACKAGES}; do
      echo "Installing ${package}..."
      apt install -y -o Dpkg::Options::="--force-overwrite" --no-install-recommends ${package}
      if [ $? -ne 0 ]; then
@@ -77,7 +78,11 @@ PLATFORM_PACKAGES_REMOVE=""
      fi
  done
  
-
+# libcoral compile and install
+git clone --recurse-submodules https://github.com/google-coral/libcoral
+cd libcoral
+#make CPU=armv7a  
+make && make install
 
 # Installing ruby packages
 gem install fpm
