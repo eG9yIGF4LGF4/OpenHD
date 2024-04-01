@@ -77,13 +77,12 @@ PLATFORM_PACKAGES_REMOVE=""
          exit 1
      fi
  done
- 
+
+# Installing ruby packages
+gem install fpm
+
 # libcoral compile and install
 git clone --recurse-submodules https://github.com/google-coral/libcoral
 cd libcoral
 #make CPU=armv7a  
 make && make install
-
-# Installing ruby packages
-gem install fpm
-
