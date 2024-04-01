@@ -85,4 +85,5 @@ gem install fpm
 git clone --recurse-submodules https://github.com/google-coral/libcoral
 cd libcoral
 #make CPU=armv7a  
-make && make install
+make CPU=armv7a 
+make CPU=armv7a install
