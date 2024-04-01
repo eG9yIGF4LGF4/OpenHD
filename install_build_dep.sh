@@ -7,7 +7,7 @@ PLATFORM="$1"
 BASE_PACKAGES="libusb-1.0-0-dev libpcap-dev libsodium-dev libnl-3-dev libnl-genl-3-dev libnl-route-3-dev libsdl2-dev"
 VIDEO_PACKAGES="libgstreamer-plugins-base1.0-dev libv4l-dev"
 CORAL_PACKAGES="libedgetpu-dev libedgetpu1-std"
-BUILD_PACKAGES="git bazel build-essential autotools-dev automake libtool python3-pip autoconf apt-transport-https ruby-dev cmake libpython3-dev libusb-1.0-0-dev"
+BUILD_PACKAGES="git build-essential autotools-dev automake libtool python3-pip autoconf apt-transport-https ruby-dev cmake libpython3-dev libusb-1.0-0-dev"
 
 
 function install_pi_packages {
@@ -82,8 +82,8 @@ PLATFORM_PACKAGES_REMOVE=""
 gem install fpm
 
 # libcoral compile and install
-git clone --recurse-submodules https://github.com/google-coral/libcoral
-cd libcoral
+#git clone --recurse-submodules https://github.com/google-coral/libcoral
+#cd libcoral
 #make CPU=armv7a  
-make CPU=armv7a 
-make CPU=armv7a install
+#make CPU=armv7a 
+#make CPU=armv7a install
