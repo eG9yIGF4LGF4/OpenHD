@@ -42,7 +42,7 @@ jobs:
         base_image: ${{ matrix.base_image }}
         image_additional_mb: 4000
         copy_repository_path: /opt
-        copy_artifact_path: OpenHD
+        copy_artifact_path: OpenHD/*.deb
         import_github_env: true
         commands: |
             cd /opt
