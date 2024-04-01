@@ -10,7 +10,7 @@ BUILD_PACKAGES="git build-essential autotools-dev automake libtool python3-pip a
 
 
 function install_pi_packages {
-PLATFORM_PACKAGES="libcamera-openhd"
+PLATFORM_PACKAGES="libcamera-openhd libedgetpu1-max"
 PLATFORM_PACKAGES_REMOVE="python3-libcamera libcamera0"
 }
 function install_x86_packages {
@@ -33,7 +33,9 @@ PLATFORM_PACKAGES_REMOVE=""
  
  echo "deb https://dl.cloudsmith.io/public/openhd/release/deb/raspbian bullseye main" | tee -a $PKG_LIST
  echo "deb https://dl.cloudsmith.io/public/openhd/dev-release/deb/raspbian bullseye main" | tee -a $PKG_LIST
-     
+ echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee -a $PKG_LIST
+
+ wget -O - -q "https://packages.cloud.google.com/apt/doc/apt-key.gpg" | apt-key add -
  wget -O - -q "https://dl.cloudsmith.io/public/openhd/release/gpg.556700D37C2BB5E8.key" | apt-key add -
  wget -O - -q "https://dl.cloudsmith.io/public/openhd/dev-release/gpg.C3F2B13772CD7F9E.key" | apt-key add -
         
